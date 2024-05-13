@@ -4,7 +4,7 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
-import 'package:ailia_insight/ffi/ailia_tokenizer.dart' as ailia_tokenizer_dart;
+import 'ailia_tokenizer.dart' as ailia_tokenizer_dart;
 
 class AiliaTokenizerModel {
   dynamic ailiaTokenizer;

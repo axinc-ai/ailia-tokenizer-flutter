@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter/services.dart';
-import 'package:ailia_tokenizer/ailia_tokenizer.dart';
+import 'package:ailia_tokenizer/ailia_tokenizer.dart' as ailia_tokenizer_dart;
+import 'package:ailia_tokenizer/ailia_tokenizer_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,34 +21,33 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _ailiaTokenizerPlugin = AiliaTokenizer();
+  String _tokens = 'Unknown';
+  final _ailiaTokenizerModel = AiliaTokenizerModel();
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    _testAiliaTokenizer();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await _ailiaTokenizerPlugin.getPlatformVersion() ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
+  Future<File> copyFileFromAssets(String path) async {
+    final byteData = await rootBundle.load('assets/$path');
+    final buffer = byteData.buffer;
+    Directory tempDir = await getTemporaryDirectory();
+    String tempPath = tempDir.path;
+    var filePath = '$tempPath/$path';
+    return File(filePath)
+      .writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, 
+    byteData.lengthInBytes));
+  }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
+  void _testAiliaTokenizer() async{
+    File bpeFile = await copyFileFromAssets("sentencepiece.bpe.model");
+    _ailiaTokenizerModel.openFile(modelFile: bpeFile.path, ailia_tokenizer_dart.AILIA_TOKENIZER_TYPE_XLM_ROBERTA);
+    String text = "Hello world.";
+    Int32List tokens = _ailiaTokenizerModel.encode(text);
+    setState((){
+      _tokens = "$tokens";
     });
   }
 
@@ -52,10 +56,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('ailia Tokenizer example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('Tokens: $_tokens\n'),
         ),
       ),
     );
