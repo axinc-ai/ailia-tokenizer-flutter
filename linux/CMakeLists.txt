@@ -45,7 +45,7 @@ target_link_libraries(${PLUGIN_NAME} PRIVATE PkgConfig::GTK)
 # This list could contain prebuilt libraries, or libraries created by an
 # external build triggered from this build file.
 set(ailia_tokenizer_bundled_libraries
-  "x64/*.so"
+  "${CMAKE_CURRENT_SOURCE_DIR}/x64/libailia_tokenizer.so"
   PARENT_SCOPE
 )
 
