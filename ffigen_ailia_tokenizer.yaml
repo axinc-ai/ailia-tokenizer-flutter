@@ -1,0 +1,8 @@
+﻿name: 'ailiaTokenizerFFI'
+description: 'Written for the FFI article'
+output: 'lib/ffi/ailia_tokenizer.dart'
+headers:
+  entry-points:
+    - 'native/ailia_tokenizer.h'
+llvm-path:
+  - '/usr/local/opt/llvm@15'

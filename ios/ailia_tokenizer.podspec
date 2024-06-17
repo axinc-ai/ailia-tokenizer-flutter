@@ -15,6 +15,7 @@ A new Flutter plugin project.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.vendored_libraries = '*.a'
+  s.libraries = "ailia_tokenizer"
   s.dependency 'Flutter'
   s.platform = :ios, '11.0'
 
