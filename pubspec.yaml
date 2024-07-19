@@ -1,6 +1,6 @@
 name: ailia_tokenizer
 description: "ailia Tokenizer for Flutter"
-version: 1.1.2
+version: 1.2.0
 homepage:
 
 environment:
