@@ -101,7 +101,7 @@ class ailiaTokenizerFFI {
 
   int ailiaOpenStreamFileW(
     ffi.Pointer<AILIANetwork> net,
-    ffi.Pointer<ffi.Int> path,
+    ffi.Pointer<ffi.WChar> path,
   ) {
     return _ailiaOpenStreamFileW(
       net,
@@ -112,9 +112,9 @@ class ailiaTokenizerFFI {
   late final _ailiaOpenStreamFileWPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(ffi.Pointer<AILIANetwork>,
-              ffi.Pointer<ffi.Int>)>>('ailiaOpenStreamFileW');
+              ffi.Pointer<ffi.WChar>)>>('ailiaOpenStreamFileW');
   late final _ailiaOpenStreamFileW = _ailiaOpenStreamFileWPtr.asFunction<
-      int Function(ffi.Pointer<AILIANetwork>, ffi.Pointer<ffi.Int>)>();
+      int Function(ffi.Pointer<AILIANetwork>, ffi.Pointer<ffi.WChar>)>();
 
   /// \~japanese
   /// @brief ネットワークオブジェクトを初期化します。(ユーザ定義ファイルアクセスコールバック)
@@ -233,7 +233,7 @@ class ailiaTokenizerFFI {
 
   int ailiaOpenWeightFileW(
     ffi.Pointer<AILIANetwork> net,
-    ffi.Pointer<ffi.Int> path,
+    ffi.Pointer<ffi.WChar> path,
   ) {
     return _ailiaOpenWeightFileW(
       net,
@@ -244,9 +244,9 @@ class ailiaTokenizerFFI {
   late final _ailiaOpenWeightFileWPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(ffi.Pointer<AILIANetwork>,
-              ffi.Pointer<ffi.Int>)>>('ailiaOpenWeightFileW');
+              ffi.Pointer<ffi.WChar>)>>('ailiaOpenWeightFileW');
   late final _ailiaOpenWeightFileW = _ailiaOpenWeightFileWPtr.asFunction<
-      int Function(ffi.Pointer<AILIANetwork>, ffi.Pointer<ffi.Int>)>();
+      int Function(ffi.Pointer<AILIANetwork>, ffi.Pointer<ffi.WChar>)>();
 
   /// \~japanese
   /// @brief ネットワークオブジェクトに重み係数を読み込みます。(ユーザ定義ファイルアクセスコールバック)
@@ -1663,7 +1663,7 @@ class ailiaTokenizerFFI {
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
   int ailiaSetTemporaryCachePathW(
-    ffi.Pointer<ffi.Int> cache_dir,
+    ffi.Pointer<ffi.WChar> cache_dir,
   ) {
     return _ailiaSetTemporaryCachePathW(
       cache_dir,
@@ -1671,10 +1671,10 @@ class ailiaTokenizerFFI {
   }
 
   late final _ailiaSetTemporaryCachePathWPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Int>)>>(
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.WChar>)>>(
           'ailiaSetTemporaryCachePathW');
   late final _ailiaSetTemporaryCachePathW = _ailiaSetTemporaryCachePathWPtr
-      .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
+      .asFunction<int Function(ffi.Pointer<ffi.WChar>)>();
 
   /// \~japanese
   /// @brief 利用可能な計算環境(CPU, GPU)の数を取得します
@@ -2055,7 +2055,7 @@ class ailiaTokenizerFFI {
 
   int ailiaTokenizerOpenModelFileW(
     ffi.Pointer<AILIATokenizer> net,
-    ffi.Pointer<ffi.Int> path,
+    ffi.Pointer<ffi.WChar> path,
   ) {
     return _ailiaTokenizerOpenModelFileW(
       net,
@@ -2066,10 +2066,10 @@ class ailiaTokenizerFFI {
   late final _ailiaTokenizerOpenModelFileWPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(ffi.Pointer<AILIATokenizer>,
-              ffi.Pointer<ffi.Int>)>>('ailiaTokenizerOpenModelFileW');
+              ffi.Pointer<ffi.WChar>)>>('ailiaTokenizerOpenModelFileW');
   late final _ailiaTokenizerOpenModelFileW =
       _ailiaTokenizerOpenModelFileWPtr.asFunction<
-          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>)>();
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.WChar>)>();
 
   /// \~japanese
   /// @brief 辞書ファイルを読み込みます。
@@ -2108,7 +2108,7 @@ class ailiaTokenizerFFI {
 
   int ailiaTokenizerOpenDictionaryFileW(
     ffi.Pointer<AILIATokenizer> net,
-    ffi.Pointer<ffi.Int> path,
+    ffi.Pointer<ffi.WChar> path,
   ) {
     return _ailiaTokenizerOpenDictionaryFileW(
       net,
@@ -2119,10 +2119,10 @@ class ailiaTokenizerFFI {
   late final _ailiaTokenizerOpenDictionaryFileWPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(ffi.Pointer<AILIATokenizer>,
-              ffi.Pointer<ffi.Int>)>>('ailiaTokenizerOpenDictionaryFileW');
+              ffi.Pointer<ffi.WChar>)>>('ailiaTokenizerOpenDictionaryFileW');
   late final _ailiaTokenizerOpenDictionaryFileW =
       _ailiaTokenizerOpenDictionaryFileWPtr.asFunction<
-          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>)>();
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.WChar>)>();
 
   /// \~japanese
   /// @brief 単語ファイルを読み込みます。
@@ -2131,7 +2131,7 @@ class ailiaTokenizerFFI {
   /// @return
   /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
   /// @details
-  /// 単語ファイルを読み込みます。AILIA_TOKENIZER_TYPE_BERT_JAPANESE_XXXの場合のみ必要です。
+  /// 単語ファイル (ROBERTAとWHISPERとGPT2はjson、それ以外はtxt) を読み込みます。
   ///
   /// \~english
   /// @brief Open vocab file.
@@ -2140,7 +2140,7 @@ class ailiaTokenizerFFI {
   /// @return
   /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
   /// @details
-  /// Open a vocab file. This API only requires for AILIA_TOKENIZER_TYPE_BERT_JAPANESE_XXX.
+  /// Open a vocab file (json for ROBERTA or WHISPER or GPT2, txt for others).
   int ailiaTokenizerOpenVocabFileA(
     ffi.Pointer<AILIATokenizer> net,
     ffi.Pointer<ffi.Char> path,
@@ -2161,7 +2161,7 @@ class ailiaTokenizerFFI {
 
   int ailiaTokenizerOpenVocabFileW(
     ffi.Pointer<AILIATokenizer> net,
-    ffi.Pointer<ffi.Int> path,
+    ffi.Pointer<ffi.WChar> path,
   ) {
     return _ailiaTokenizerOpenVocabFileW(
       net,
@@ -2172,10 +2172,10 @@ class ailiaTokenizerFFI {
   late final _ailiaTokenizerOpenVocabFileWPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(ffi.Pointer<AILIATokenizer>,
-              ffi.Pointer<ffi.Int>)>>('ailiaTokenizerOpenVocabFileW');
+              ffi.Pointer<ffi.WChar>)>>('ailiaTokenizerOpenVocabFileW');
   late final _ailiaTokenizerOpenVocabFileW =
       _ailiaTokenizerOpenVocabFileWPtr.asFunction<
-          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>)>();
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.WChar>)>();
 
   /// \~japanese
   /// @brief マージファイルを読み込みます。
@@ -2184,7 +2184,7 @@ class ailiaTokenizerFFI {
   /// @return
   /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
   /// @details
-  /// マージファイルを読み込みます。AILIA_TOKENIZER_TYPE_ROBERTAの場合のみ必要です。
+  /// マージファイル (txt) を読み込みます。AILIA_TOKENIZER_TYPE_ROBERTAもしくはAILIA_TOKENIZER_TYPE_WHISPERもしくはAILIA_TOKENIZER_TYPE_GPT2の場合のみ有効です。
   ///
   /// \~english
   /// @brief Open merges file.
@@ -2193,7 +2193,7 @@ class ailiaTokenizerFFI {
   /// @return
   /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
   /// @details
-  /// Open a vocab file. This API only requires for AILIA_TOKENIZER_TYPE_ROBERTA.
+  /// Open a merge file (txt). This API only requires for AILIA_TOKENIZER_TYPE_ROBERTA or AILIA_TOKENIZER_TYPE_WHISPER or AILIA_TOKENIZER_TYPE_GPT2.
   int ailiaTokenizerOpenMergeFileA(
     ffi.Pointer<AILIATokenizer> net,
     ffi.Pointer<ffi.Char> path,
@@ -2214,7 +2214,7 @@ class ailiaTokenizerFFI {
 
   int ailiaTokenizerOpenMergeFileW(
     ffi.Pointer<AILIATokenizer> net,
-    ffi.Pointer<ffi.Int> path,
+    ffi.Pointer<ffi.WChar> path,
   ) {
     return _ailiaTokenizerOpenMergeFileW(
       net,
@@ -2225,10 +2225,118 @@ class ailiaTokenizerFFI {
   late final _ailiaTokenizerOpenMergeFileWPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int Function(ffi.Pointer<AILIATokenizer>,
-              ffi.Pointer<ffi.Int>)>>('ailiaTokenizerOpenMergeFileW');
+              ffi.Pointer<ffi.WChar>)>>('ailiaTokenizerOpenMergeFileW');
   late final _ailiaTokenizerOpenMergeFileW =
       _ailiaTokenizerOpenMergeFileWPtr.asFunction<
-          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>)>();
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.WChar>)>();
+
+  /// \~japanese
+  /// @brief 追加トークンファイルを読み込みます。
+  /// @param net トークナイザオブジェクトポインタへのポインタ
+  /// @param path スペシャルトークンファイルのパス
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// 追加トークンファイル (json) を読み込みます。AILIA_TOKENIZER_TYPE_WHISPERの場合のみ有効です。
+  ///
+  /// \~english
+  /// @brief Open added tokens file.
+  /// @param net A pointer to the tokenizer instance pointer
+  /// @param path Path for special token file
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// Open a added tokens file (json). This API only requires for AILIA_TOKENIZER_TYPE_WHISPER.
+  int ailiaTokenizerOpenAddedTokensFileA(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.Char> path,
+  ) {
+    return _ailiaTokenizerOpenAddedTokensFileA(
+      net,
+      path,
+    );
+  }
+
+  late final _ailiaTokenizerOpenAddedTokensFileAPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>,
+              ffi.Pointer<ffi.Char>)>>('ailiaTokenizerOpenAddedTokensFileA');
+  late final _ailiaTokenizerOpenAddedTokensFileA =
+      _ailiaTokenizerOpenAddedTokensFileAPtr.asFunction<
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Char>)>();
+
+  int ailiaTokenizerOpenAddedTokensFileW(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.WChar> path,
+  ) {
+    return _ailiaTokenizerOpenAddedTokensFileW(
+      net,
+      path,
+    );
+  }
+
+  late final _ailiaTokenizerOpenAddedTokensFileWPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>,
+              ffi.Pointer<ffi.WChar>)>>('ailiaTokenizerOpenAddedTokensFileW');
+  late final _ailiaTokenizerOpenAddedTokensFileW =
+      _ailiaTokenizerOpenAddedTokensFileWPtr.asFunction<
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.WChar>)>();
+
+  /// \~japanese
+  /// @brief コンフィグファイルを読み込みます。
+  /// @param net トークナイザオブジェクトポインタへのポインタ
+  /// @param path コンフィグファイルのパス
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// トークナイザコンフィグファイル (json) を読み込みます。AILIA_TOKENIZER_TYPE_BERTの場合のみ有効です。
+  ///
+  /// \~english
+  /// @brief Open tokenizer config file.
+  /// @param net A pointer to the tokenizer instance pointer
+  /// @param path Path for config file
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// Open a tokenizer config file (json). This API only requires for AILIA_TOKENIZER_TYPE_BERT.
+  int ailiaTokenizerOpenTokenizerConfigFileA(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.Char> path,
+  ) {
+    return _ailiaTokenizerOpenTokenizerConfigFileA(
+      net,
+      path,
+    );
+  }
+
+  late final _ailiaTokenizerOpenTokenizerConfigFileAPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Char>)>>(
+      'ailiaTokenizerOpenTokenizerConfigFileA');
+  late final _ailiaTokenizerOpenTokenizerConfigFileA =
+      _ailiaTokenizerOpenTokenizerConfigFileAPtr.asFunction<
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Char>)>();
+
+  int ailiaTokenizerOpenTokenizerConfigFileW(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.WChar> path,
+  ) {
+    return _ailiaTokenizerOpenTokenizerConfigFileW(
+      net,
+      path,
+    );
+  }
+
+  late final _ailiaTokenizerOpenTokenizerConfigFileWPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.WChar>)>>(
+      'ailiaTokenizerOpenTokenizerConfigFileW');
+  late final _ailiaTokenizerOpenTokenizerConfigFileW =
+      _ailiaTokenizerOpenTokenizerConfigFileWPtr.asFunction<
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.WChar>)>();
 
   /// \~japanese
   /// @brief エンコードを行います。
@@ -2238,6 +2346,7 @@ class ailiaTokenizerFFI {
   /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
   /// @details
   /// 認識した結果はailiaTokenizerGetTokens APIで取得します。
+  /// split_special_tokens=Trueと同様に、Special Tokenは分割して文字列として扱われます。
   ///
   /// \~english
   /// @brief Perform encode
@@ -2247,6 +2356,7 @@ class ailiaTokenizerFFI {
   /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
   /// @details
   /// Get the encoded result with ailiaTokenizerGetTokens API.
+  /// Just like with split_special_tokens=True, Special Tokens are treated as strings by splitting them.
   int ailiaTokenizerEncode(
     ffi.Pointer<AILIATokenizer> net,
     ffi.Pointer<ffi.Char> utf8,
@@ -2263,6 +2373,43 @@ class ailiaTokenizerFFI {
               ffi.Pointer<ffi.Char>)>>('ailiaTokenizerEncode');
   late final _ailiaTokenizerEncode = _ailiaTokenizerEncodePtr.asFunction<
       int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Char>)>();
+
+  /// \~japanese
+  /// @brief スペシャルトークンを含んだエンコードを行います。
+  /// @param net トークナイザオブジェクトポインタ
+  /// @param text エンコードするテキスト(UTF8)
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// 認識した結果はailiaTokenizerGetTokens APIで取得します。
+  /// split_special_tokens=Falseと同様に、Special Tokenを出力します。
+  ///
+  /// \~english
+  /// @brief Perform encode with special tokens
+  /// @param net A tokenizer instance pointer
+  /// @param text Text for encode (UTF8)
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// Get the encoded result with ailiaTokenizerGetTokens API.
+  /// Similarly to split_special_tokens=False, special tokens will be output.
+  int ailiaTokenizerEncodeWithSpecialTokens(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.Char> utf8,
+  ) {
+    return _ailiaTokenizerEncodeWithSpecialTokens(
+      net,
+      utf8,
+    );
+  }
+
+  late final _ailiaTokenizerEncodeWithSpecialTokensPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>,
+              ffi.Pointer<ffi.Char>)>>('ailiaTokenizerEncodeWithSpecialTokens');
+  late final _ailiaTokenizerEncodeWithSpecialTokens =
+      _ailiaTokenizerEncodeWithSpecialTokensPtr.asFunction<
+          int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Char>)>();
 
   /// \~japanese
   /// @brief トークンの数を取得します。
@@ -2308,7 +2455,7 @@ class ailiaTokenizerFFI {
   /// ailiaTokenizerEncode() を一度も実行していない場合は \ref AILIA_STATUS_INVALID_STATE が返ります。
   ///
   /// \~english
-  /// @brief Gets the detection results.
+  /// @brief Gets the tokens.
   /// @param net   A tokenizer instance pointer
   /// @param tokens Token
   /// @param count  Token count
@@ -2336,6 +2483,139 @@ class ailiaTokenizerFFI {
       int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>, int)>();
 
   /// \~japanese
+  /// @brief ワードIDを取得します。
+  /// @param net   トークナイザオブジェクトポインタ
+  /// @param word_ids ワードID
+  /// @param count  格納先トークン数
+  /// @param
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// ailiaTokenizerEncode() を一度も実行していない場合は \ref AILIA_STATUS_INVALID_STATE が返ります。
+  /// AILIA_TOKENIZER_TYPE_ROBERTAとAILIA_TOKENIZER_TYPE_BERTの場合のみ有効です。
+  ///
+  /// \~english
+  /// @brief Gets the word ID.
+  /// @param net   A tokenizer instance pointer
+  /// @param word_ids Word ID
+  /// @param count  Token count
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// If  ailiaTokenizerEncode()  is not run at all, the function returns  \ref AILIA_STATUS_INVALID_STATE .
+  /// This is valid only for AILIA_TOKENIZER_TYPE_ROBERTA and AILIA_TOKENIZER_TYPE_BERT.
+  int ailiaTokenizerGetWordIDs(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.Int> word_ids,
+    int count,
+  ) {
+    return _ailiaTokenizerGetWordIDs(
+      net,
+      word_ids,
+      count,
+    );
+  }
+
+  late final _ailiaTokenizerGetWordIDsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>,
+              ffi.UnsignedInt)>>('ailiaTokenizerGetWordIDs');
+  late final _ailiaTokenizerGetWordIDs =
+      _ailiaTokenizerGetWordIDsPtr.asFunction<
+          int Function(
+              ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>, int)>();
+
+  /// \~japanese
+  /// @brief 開始文字位置を取得します。
+  /// @param net   トークナイザオブジェクトポインタ
+  /// @param char_starts 開始文字位置
+  /// @param count  格納先トークン数
+  /// @param
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// ailiaTokenizerEncode() を一度も実行していない場合は \ref AILIA_STATUS_INVALID_STATE が返ります。
+  /// AILIA_TOKENIZER_TYPE_ROBERTAとAILIA_TOKENIZER_TYPE_BERTの場合のみ有効です。
+  /// 各トークンに対応するUTF32単位での開始文字位置が返ります。
+  ///
+  /// \~english
+  /// @brief Gets the Char start positions.
+  /// @param net   A tokenizer instance pointer
+  /// @param char_starts Character start position
+  /// @param count  Token count
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// If  ailiaTokenizerEncode()  is not run at all, the function returns  \ref AILIA_STATUS_INVALID_STATE .
+  /// This is valid only for AILIA_TOKENIZER_TYPE_ROBERTA and AILIA_TOKENIZER_TYPE_BERT.
+  /// The character start positions in UTF-32 units corresponding to each token are returned.
+  int ailiaTokenizerGetCharStarts(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.Int> char_starts,
+    int count,
+  ) {
+    return _ailiaTokenizerGetCharStarts(
+      net,
+      char_starts,
+      count,
+    );
+  }
+
+  late final _ailiaTokenizerGetCharStartsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>,
+              ffi.UnsignedInt)>>('ailiaTokenizerGetCharStarts');
+  late final _ailiaTokenizerGetCharStarts =
+      _ailiaTokenizerGetCharStartsPtr.asFunction<
+          int Function(
+              ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>, int)>();
+
+  /// \~japanese
+  /// @brief 終了文字位置を取得します。
+  /// @param net   トークナイザオブジェクトポインタ
+  /// @param char_ends 終了文字位置
+  /// @param count  格納先トークン数
+  /// @param
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// ailiaTokenizerEncode() を一度も実行していない場合は \ref AILIA_STATUS_INVALID_STATE が返ります。
+  /// AILIA_TOKENIZER_TYPE_ROBERTAとAILIA_TOKENIZER_TYPE_BERTの場合のみ有効です。
+  /// 各トークンに対応するUTF32単位での終了文字位置が返ります。
+  ///
+  /// \~english
+  /// @brief Gets the Char end positions.
+  /// @param net   A tokenizer instance pointer
+  /// @param char_ends Char end position
+  /// @param count  Token count
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// If  ailiaTokenizerEncode()  is not run at all, the function returns  \ref AILIA_STATUS_INVALID_STATE .
+  /// This is valid only for AILIA_TOKENIZER_TYPE_ROBERTA and AILIA_TOKENIZER_TYPE_BERT.
+  /// The character end positions in UTF-32 units corresponding to each token are returned.
+  int ailiaTokenizerGetCharEnds(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.Int> char_ends,
+    int count,
+  ) {
+    return _ailiaTokenizerGetCharEnds(
+      net,
+      char_ends,
+      count,
+    );
+  }
+
+  late final _ailiaTokenizerGetCharEndsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>,
+              ffi.UnsignedInt)>>('ailiaTokenizerGetCharEnds');
+  late final _ailiaTokenizerGetCharEnds =
+      _ailiaTokenizerGetCharEndsPtr.asFunction<
+          int Function(
+              ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>, int)>();
+
+  /// \~japanese
   /// @brief デコードを行います。
   /// @param net トークナイザオブジェクトポインタ
   /// @param tokens デコードするトークン
@@ -2343,10 +2623,11 @@ class ailiaTokenizerFFI {
   /// @return
   /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
   /// @details
-  /// 認識した結果はailiaTokenizerGetText APIで取得します。
+  /// デコードした結果はailiaTokenizerGetText APIで取得します。
+  /// skip_special_tokens=Trueと同様に、Special Tokenは出力しません。
   ///
   /// \~english
-  /// @brief Perform encode
+  /// @brief Perform decode
   /// @param net A tokenizer instance pointer
   /// @param tokens Tokens for decode
   /// @param token_count The number of tokens
@@ -2354,6 +2635,7 @@ class ailiaTokenizerFFI {
   /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
   /// @details
   /// Get the decoded result with ailiaTokenizerGetText API.
+  /// Similarly to skip_special_tokens=True, special tokens will not be output.
   int ailiaTokenizerDecode(
     ffi.Pointer<AILIATokenizer> net,
     ffi.Pointer<ffi.Int> tokens,
@@ -2372,6 +2654,48 @@ class ailiaTokenizerFFI {
               ffi.UnsignedInt)>>('ailiaTokenizerDecode');
   late final _ailiaTokenizerDecode = _ailiaTokenizerDecodePtr.asFunction<
       int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>, int)>();
+
+  /// \~japanese
+  /// @brief スペシャルトークンを含んだデコードを行います。
+  /// @param net トークナイザオブジェクトポインタ
+  /// @param tokens デコードするトークン
+  /// @param token_count トークンの数
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// デコードした結果はailiaTokenizerGetText APIで取得します。
+  /// skip_special_tokens=Falseと同様に、Special Tokenを出力します。
+  ///
+  /// \~english
+  /// @brief Perform decode with special tokens
+  /// @param net A tokenizer instance pointer
+  /// @param tokens Tokens for decode
+  /// @param token_count The number of tokens
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// Get the decoded result with ailiaTokenizerGetText API.
+  /// Similarly to skip_special_tokens=False, special tokens will be output.
+  int ailiaTokenizerDecodeWithSpecialTokens(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.Int> tokens,
+    int token_count,
+  ) {
+    return _ailiaTokenizerDecodeWithSpecialTokens(
+      net,
+      tokens,
+      token_count,
+    );
+  }
+
+  late final _ailiaTokenizerDecodeWithSpecialTokensPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>,
+              ffi.UnsignedInt)>>('ailiaTokenizerDecodeWithSpecialTokens');
+  late final _ailiaTokenizerDecodeWithSpecialTokens =
+      _ailiaTokenizerDecodeWithSpecialTokensPtr.asFunction<
+          int Function(
+              ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Int>, int)>();
 
   /// \~japanese
   /// @brief テキストの長さを取得します。(NULL文字含む)
@@ -2442,6 +2766,79 @@ class ailiaTokenizerFFI {
               ffi.UnsignedInt)>>('ailiaTokenizerGetText');
   late final _ailiaTokenizerGetText = _ailiaTokenizerGetTextPtr.asFunction<
       int Function(ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.Char>, int)>();
+
+  /// \~japanese
+  /// @brief Vocabの数を取得します。
+  /// @param net   トークナイザオブジェクトポインタ
+  /// @param size  Vocabの要素数
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  ///
+  /// \~english
+  /// @brief Gets the size of vocab. (Include null)
+  /// @param net   A tokenizer instance pointer
+  /// @param size  The size of vocab
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  int ailiaTokenizerGetVocabSize(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.UnsignedInt> size,
+  ) {
+    return _ailiaTokenizerGetVocabSize(
+      net,
+      size,
+    );
+  }
+
+  late final _ailiaTokenizerGetVocabSizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>,
+              ffi.Pointer<ffi.UnsignedInt>)>>('ailiaTokenizerGetVocabSize');
+  late final _ailiaTokenizerGetVocabSize =
+      _ailiaTokenizerGetVocabSizePtr.asFunction<
+          int Function(
+              ffi.Pointer<AILIATokenizer>, ffi.Pointer<ffi.UnsignedInt>)>();
+
+  /// \~japanese
+  /// @brief Vocabの取得を行います。
+  /// @param net トークナイザオブジェクトポインタ
+  /// @param token トークン
+  /// @param vocab Vocabのテキスト(UTF8)
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// vocabを解放する必要はありません。
+  /// vocabの有効期間は次にailiaTokenizer APIを呼び出すまでになります。
+  ///
+  /// \~english
+  /// @brief Perform encode
+  /// @param net A tokenizer instance pointer
+  /// @param token Token
+  /// @param text Text of vocab (UTF8)
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// There is no need to release the vocab.
+  /// The validity period of the vocab will last until the next time the ailiaTokenizer API is called.
+  int ailiaTokenizerGetVocab(
+    ffi.Pointer<AILIATokenizer> net,
+    int token,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> vocab,
+  ) {
+    return _ailiaTokenizerGetVocab(
+      net,
+      token,
+      vocab,
+    );
+  }
+
+  late final _ailiaTokenizerGetVocabPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<AILIATokenizer>, ffi.Int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('ailiaTokenizerGetVocab');
+  late final _ailiaTokenizerGetVocab = _ailiaTokenizerGetVocabPtr.asFunction<
+      int Function(ffi.Pointer<AILIATokenizer>, int,
+          ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
   /// \~japanese
   /// @brief トークナイズオブジェクトを破棄します。
@@ -2544,6 +2941,98 @@ class ailiaTokenizerFFI {
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.UnsignedInt>, int)>();
 }
 
+final class __mbstate_t extends ffi.Union {
+  @ffi.Array.multi([128])
+  external ffi.Array<ffi.Char> __mbstate8;
+
+  @ffi.LongLong()
+  external int _mbstateL;
+}
+
+final class __darwin_pthread_handler_rec extends ffi.Struct {
+  external ffi
+      .Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
+      __routine;
+
+  external ffi.Pointer<ffi.Void> __arg;
+
+  external ffi.Pointer<__darwin_pthread_handler_rec> __next;
+}
+
+final class _opaque_pthread_attr_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  @ffi.Array.multi([56])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
+final class _opaque_pthread_cond_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  @ffi.Array.multi([40])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
+final class _opaque_pthread_condattr_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  @ffi.Array.multi([8])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
+final class _opaque_pthread_mutex_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  @ffi.Array.multi([56])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
+final class _opaque_pthread_mutexattr_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  @ffi.Array.multi([8])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
+final class _opaque_pthread_once_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  @ffi.Array.multi([8])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
+final class _opaque_pthread_rwlock_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  @ffi.Array.multi([192])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
+final class _opaque_pthread_rwlockattr_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
+final class _opaque_pthread_t extends ffi.Struct {
+  @ffi.Long()
+  external int __sig;
+
+  external ffi.Pointer<__darwin_pthread_handler_rec> __cleanup_stack;
+
+  @ffi.Array.multi([8176])
+  external ffi.Array<ffi.Char> __opaque;
+}
+
 final class _ailiaFileCallback extends ffi.Struct {
   external AILIA_USER_API_FOPEN fopen;
 
@@ -2571,8 +3060,10 @@ final class _ailiaFileCallback extends ffi.Struct {
 /// @return
 /// This function returns a user-defined file pointer if successful.
 /// It returns NULL if it fails.
-typedef AILIA_USER_API_FOPEN = ffi.Pointer<
-    ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>;
+typedef AILIA_USER_API_FOPEN
+    = ffi.Pointer<ffi.NativeFunction<AILIA_USER_API_FOPENFunction>>;
+typedef AILIA_USER_API_FOPENFunction = ffi.Pointer<ffi.Void> Function(
+    ffi.Pointer<ffi.Void>);
 
 /// \~japanese
 /// @brief ファイルをシークします
@@ -2589,8 +3080,12 @@ typedef AILIA_USER_API_FOPEN = ffi.Pointer<
 /// @return
 /// This function returns  \ref AILIA_USER_API_SUCCESS  if successful.
 /// It returns  \ref AILIA_USER_API_FAILED  if it fails.
-typedef AILIA_USER_API_FSEEK = ffi.Pointer<
-    ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.LongLong)>>;
+typedef AILIA_USER_API_FSEEK
+    = ffi.Pointer<ffi.NativeFunction<AILIA_USER_API_FSEEKFunction>>;
+typedef AILIA_USER_API_FSEEKFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Void>, ffi.LongLong);
+typedef DartAILIA_USER_API_FSEEKFunction = int Function(
+    ffi.Pointer<ffi.Void>, int);
 
 /// \~japanese
 /// @brief ファイルの現在位置を取得します
@@ -2605,8 +3100,11 @@ typedef AILIA_USER_API_FSEEK = ffi.Pointer<
 /// @return
 /// This function returns the position, in bytes, the file pointer points to if successful.
 /// It returns -1 if it fails.
-typedef AILIA_USER_API_FTELL = ffi
-    .Pointer<ffi.NativeFunction<ffi.LongLong Function(ffi.Pointer<ffi.Void>)>>;
+typedef AILIA_USER_API_FTELL
+    = ffi.Pointer<ffi.NativeFunction<AILIA_USER_API_FTELLFunction>>;
+typedef AILIA_USER_API_FTELLFunction = ffi.LongLong Function(
+    ffi.Pointer<ffi.Void>);
+typedef DartAILIA_USER_API_FTELLFunction = int Function(ffi.Pointer<ffi.Void>);
 
 /// \~japanese
 /// @brief ファイルからデータを読み込みます
@@ -2627,10 +3125,12 @@ typedef AILIA_USER_API_FTELL = ffi
 /// This function returns  \ref AILIA_USER_API_SUCCESS  if successful.
 /// It returns  \ref AILIA_USER_API_FAILED  if it fails.
 /// Note that unlike the standard API, the return value will be AILIA_USER_API_*.
-typedef AILIA_USER_API_FREAD = ffi.Pointer<
-    ffi.NativeFunction<
-        ffi.Int Function(
-            ffi.Pointer<ffi.Void>, ffi.LongLong, ffi.Pointer<ffi.Void>)>>;
+typedef AILIA_USER_API_FREAD
+    = ffi.Pointer<ffi.NativeFunction<AILIA_USER_API_FREADFunction>>;
+typedef AILIA_USER_API_FREADFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Void>, ffi.LongLong, ffi.Pointer<ffi.Void>);
+typedef DartAILIA_USER_API_FREADFunction = int Function(
+    ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>);
 
 /// \~japanese
 /// @brief ファイルのサイズを取得します
@@ -2645,8 +3145,11 @@ typedef AILIA_USER_API_FREAD = ffi.Pointer<
 /// @return
 /// This function returns the size of the file in bytes if successful.
 /// It returns -1 if it fails.
-typedef AILIA_USER_API_FSIZE = ffi
-    .Pointer<ffi.NativeFunction<ffi.LongLong Function(ffi.Pointer<ffi.Void>)>>;
+typedef AILIA_USER_API_FSIZE
+    = ffi.Pointer<ffi.NativeFunction<AILIA_USER_API_FSIZEFunction>>;
+typedef AILIA_USER_API_FSIZEFunction = ffi.LongLong Function(
+    ffi.Pointer<ffi.Void>);
+typedef DartAILIA_USER_API_FSIZEFunction = int Function(ffi.Pointer<ffi.Void>);
 
 /// \~japanese
 /// @brief ファイルを閉じます
@@ -2662,7 +3165,9 @@ typedef AILIA_USER_API_FSIZE = ffi
 /// This function returns  \ref AILIA_USER_API_SUCCESS  if successful.
 /// It returns  \ref AILIA_USER_API_FAILED  if it fails.
 typedef AILIA_USER_API_FCLOSE
-    = ffi.Pointer<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void>)>>;
+    = ffi.Pointer<ffi.NativeFunction<AILIA_USER_API_FCLOSEFunction>>;
+typedef AILIA_USER_API_FCLOSEFunction = ffi.Int Function(ffi.Pointer<ffi.Void>);
+typedef DartAILIA_USER_API_FCLOSEFunction = int Function(ffi.Pointer<ffi.Void>);
 
 /// ネットワークオブジェクトのインスタンス
 final class AILIANetwork extends ffi.Opaque {}
@@ -2757,6 +3262,78 @@ typedef AILIAEnvironment = _AILIAEnvironment;
 
 /// トークナイズオブジェクトのインスタンス
 final class AILIATokenizer extends ffi.Opaque {}
+
+const int __has_safe_buffers = 0;
+
+const int __DARWIN_ONLY_64_BIT_INO_T = 0;
+
+const int __DARWIN_ONLY_UNIX_CONFORMANCE = 1;
+
+const int __DARWIN_ONLY_VERS_1050 = 0;
+
+const int __DARWIN_UNIX03 = 1;
+
+const int __DARWIN_64_BIT_INO_T = 1;
+
+const int __DARWIN_VERS_1050 = 1;
+
+const int __DARWIN_NON_CANCELABLE = 0;
+
+const String __DARWIN_SUF_64_BIT_INO_T = '\$INODE64';
+
+const String __DARWIN_SUF_1050 = '\$1050';
+
+const String __DARWIN_SUF_EXTSN = '\$DARWIN_EXTSN';
+
+const int __DARWIN_C_ANSI = 4096;
+
+const int __DARWIN_C_FULL = 900000;
+
+const int __DARWIN_C_LEVEL = 900000;
+
+const int __STDC_WANT_LIB_EXT1__ = 1;
+
+const int __DARWIN_NO_LONG_LONG = 0;
+
+const int _DARWIN_FEATURE_64_BIT_INODE = 1;
+
+const int _DARWIN_FEATURE_ONLY_UNIX_CONFORMANCE = 1;
+
+const int _DARWIN_FEATURE_UNIX_CONFORMANCE = 3;
+
+const int __has_ptrcheck = 0;
+
+const int __DARWIN_NULL = 0;
+
+const int __PTHREAD_SIZE__ = 8176;
+
+const int __PTHREAD_ATTR_SIZE__ = 56;
+
+const int __PTHREAD_MUTEXATTR_SIZE__ = 8;
+
+const int __PTHREAD_MUTEX_SIZE__ = 56;
+
+const int __PTHREAD_CONDATTR_SIZE__ = 8;
+
+const int __PTHREAD_COND_SIZE__ = 40;
+
+const int __PTHREAD_ONCE_SIZE__ = 8;
+
+const int __PTHREAD_RWLOCK_SIZE__ = 192;
+
+const int __PTHREAD_RWLOCKATTR_SIZE__ = 16;
+
+const int __DARWIN_WCHAR_MAX = 2147483647;
+
+const int __DARWIN_WCHAR_MIN = -2147483648;
+
+const int __DARWIN_WEOF = -1;
+
+const int _FORTIFY_SOURCE = 2;
+
+const int NULL = 0;
+
+const int USER_ADDR_NULL = 0;
 
 const int AILIA_USER_API_SUCCESS = 0;
 
@@ -2882,6 +3459,8 @@ const int AILIA_MEMORY_REDUCE_INTERSTAGE = 4;
 
 const int AILIA_MEMORY_REUSE_INTERSTAGE = 8;
 
+const int AILIA_MEMORY_REDUCE_CONSTANT_WITH_FILE_MAPPED = 16;
+
 const int AILIA_MEMORY_OPTIMAIZE_DEFAULT = 1;
 
 const int AILIA_PROFILE_DISABLE = 0;
@@ -2903,6 +3482,12 @@ const int AILIA_TOKENIZER_TYPE_BERT_JAPANESE_CHARACTER = 5;
 const int AILIA_TOKENIZER_TYPE_T5 = 6;
 
 const int AILIA_TOKENIZER_TYPE_ROBERTA = 7;
+
+const int AILIA_TOKENIZER_TYPE_BERT = 8;
+
+const int AILIA_TOKENIZER_TYPE_GPT2 = 9;
+
+const int AILIA_TOKENIZER_TYPE_LLAMA = 10;
 
 const int AILIA_TOKENIZER_FLAG_NONE = 0;
 
