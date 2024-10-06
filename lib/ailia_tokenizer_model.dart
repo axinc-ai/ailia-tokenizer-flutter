@@ -62,15 +62,19 @@ class AiliaTokenizerModel {
 
     if (modelFile != null) {
       if (Platform.isWindows) {
+        Pointer<Int16> nativeModelFile = modelFile.toNativeUtf16().cast<Int16>();
         status = ailiaTokenizer.ailiaTokenizerOpenModelFileW(
           ppAiliaTokenizer!.value,
-          modelFile.toNativeUtf16().cast<Int16>(),
+          nativeModelFile,
         );
+        calloc.free(nativeModelFile);
       } else {
+        Pointer<Int8> nativeModelFile = modelFile.toNativeUtf8().cast<Int8>();
         status = ailiaTokenizer.ailiaTokenizerOpenModelFileA(
           ppAiliaTokenizer!.value,
-          modelFile.toNativeUtf8().cast<Int8>(),
+          nativeModelFile,
         );
+        calloc.free(nativeModelFile);
       }
       if (status != ailiaStatusSuccess) {
         throw Exception("ailiaTokenizerOpenModelFileA error $status");
@@ -79,15 +83,19 @@ class AiliaTokenizerModel {
 
     if (vocabFile != null) {
       if (Platform.isWindows) {
+        Pointer<Int16> nativeVocablFile = vocabFile.toNativeUtf16().cast<Int16>();
         status = ailiaTokenizer.ailiaTokenizerOpenVocabFileW(
           ppAiliaTokenizer!.value,
-          vocabFile.toNativeUtf16().cast<Int16>(),
+          nativeVocablFile,
         );
+        calloc.free(nativeVocablFile);
       } else {
+        Pointer<Int8> nativeVocabFile = vocabFile.toNativeUtf8().cast<Int8>();
         status = ailiaTokenizer.ailiaTokenizerOpenVocabFileA(
           ppAiliaTokenizer!.value,
-          vocabFile.toNativeUtf8().cast<Int8>(),
+          nativeVocabFile,
         );
+        calloc.free(nativeVocabFile);
       }
       if (status != ailiaStatusSuccess) {
         throw Exception(
@@ -97,15 +105,19 @@ class AiliaTokenizerModel {
 
     if (mergeFile != null) {
       if (Platform.isWindows) {
+        Pointer<Int16> nativeMergeFile = mergeFile.toNativeUtf16().cast<Int16>();
         status = ailiaTokenizer.ailiaTokenizerOpenMergeFileW(
           ppAiliaTokenizer!.value,
-          mergeFile.toNativeUtf16().cast<Int16>(),
+          nativeMergeFile,
         );
+        calloc.free(nativeMergeFile);
       } else {
+        Pointer<Int8> nativeMergeFile = mergeFile.toNativeUtf8().cast<Int8>();
         status = ailiaTokenizer.ailiaTokenizerOpenMergeFileA(
           ppAiliaTokenizer!.value,
-          mergeFile.toNativeUtf8().cast<Int8>(),
+          nativeMergeFile,
         );
+        calloc.free(nativeMergeFile);
       }
       if (status != ailiaStatusSuccess) {
         throw Exception(
@@ -114,6 +126,34 @@ class AiliaTokenizerModel {
     }
 
     available = true;
+  }
+
+  void addSpecialTokens(List<String> specialTokens){
+     if (!available) {
+      return;
+    }
+
+    final Pointer<Pointer<Utf8>> charArray = 
+        calloc.allocate<Pointer<Utf8>>(specialTokens.length);
+
+    for (int i = 0; i < specialTokens.length; i++) {
+      charArray[i] = specialTokens[i].toNativeUtf8();
+    }
+
+    int status = ailiaTokenizer.ailiaTokenizerAddSpecialTokens(
+      ppAiliaTokenizer!.value,
+      charArray,
+      specialTokens.length,
+    );
+
+    for (int i = 0; i < specialTokens.length; i++) {
+      calloc.free(charArray[i]);
+    }
+    calloc.free(charArray);
+
+    if (status != ailiaStatusSuccess) {
+      throw Exception("ailiaTokenizerAddSpecialTokens error $status");
+    }
   }
 
   void close() {
@@ -136,10 +176,12 @@ class AiliaTokenizerModel {
       throw Exception("Model not opened");
     }
 
+    Pointer<Int8> nativeText = text.toNativeUtf8().cast<Int8>();
     status = ailiaTokenizer.ailiaTokenizerEncode(
       ppAiliaTokenizer!.value,
-      text.toNativeUtf8().cast<Int8>(),
+      nativeText,
     );
+    calloc.free(nativeText);
     if (status != ailiaStatusSuccess) {
       throw Exception("ailiaTokenizerEncode error $status");
     }
