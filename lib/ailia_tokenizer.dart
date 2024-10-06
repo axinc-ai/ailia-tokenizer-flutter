@@ -2841,6 +2841,48 @@ class ailiaTokenizerFFI {
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
   /// \~japanese
+  /// @brief SpecialTokenの追加を行います。
+  /// @param net トークナイザオブジェクトポインタ
+  /// @param tokens トークン(UTF8)
+  /// @param count 追加する個数
+  /// @return
+  /// 成功した場合は \ref AILIA_STATUS_SUCCESS 、そうでなければエラーコードを返す。
+  /// @details
+  /// AILIA_TOKENIZER_TYPE_ROBERTAの場合のみ有効です。
+  ///
+  /// \~english
+  /// @brief Add SpecialToken
+  /// @param net A tokenizer instance pointer
+  /// @param tokens Token(UTF8)
+  /// @param count The number of tokens
+  /// @return
+  /// If this function is successful, it returns  \ref AILIA_STATUS_SUCCESS , or an error code otherwise.
+  /// @details
+  /// This is valid only for AILIA_TOKENIZER_TYPE_ROBERTA and AILIA_TOKENIZER_TYPE_ROBERTA.
+  int ailiaTokenizerAddSpecialTokens(
+    ffi.Pointer<AILIATokenizer> net,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> tokens,
+    int count,
+  ) {
+    return _ailiaTokenizerAddSpecialTokens(
+      net,
+      tokens,
+      count,
+    );
+  }
+
+  late final _ailiaTokenizerAddSpecialTokensPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<AILIATokenizer>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.UnsignedInt)>>('ailiaTokenizerAddSpecialTokens');
+  late final _ailiaTokenizerAddSpecialTokens =
+      _ailiaTokenizerAddSpecialTokensPtr.asFunction<
+          int Function(ffi.Pointer<AILIATokenizer>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
+
+  /// \~japanese
   /// @brief トークナイズオブジェクトを破棄します。
   /// @param net トークナイザオブジェクトポインタ
   ///
@@ -3263,13 +3305,13 @@ typedef AILIAEnvironment = _AILIAEnvironment;
 /// トークナイズオブジェクトのインスタンス
 final class AILIATokenizer extends ffi.Opaque {}
 
-const int __has_safe_buffers = 0;
+const int __has_safe_buffers = 1;
 
-const int __DARWIN_ONLY_64_BIT_INO_T = 0;
+const int __DARWIN_ONLY_64_BIT_INO_T = 1;
 
 const int __DARWIN_ONLY_UNIX_CONFORMANCE = 1;
 
-const int __DARWIN_ONLY_VERS_1050 = 0;
+const int __DARWIN_ONLY_VERS_1050 = 1;
 
 const int __DARWIN_UNIX03 = 1;
 
@@ -3278,10 +3320,6 @@ const int __DARWIN_64_BIT_INO_T = 1;
 const int __DARWIN_VERS_1050 = 1;
 
 const int __DARWIN_NON_CANCELABLE = 0;
-
-const String __DARWIN_SUF_64_BIT_INO_T = '\$INODE64';
-
-const String __DARWIN_SUF_1050 = '\$1050';
 
 const String __DARWIN_SUF_EXTSN = '\$DARWIN_EXTSN';
 
@@ -3296,6 +3334,10 @@ const int __STDC_WANT_LIB_EXT1__ = 1;
 const int __DARWIN_NO_LONG_LONG = 0;
 
 const int _DARWIN_FEATURE_64_BIT_INODE = 1;
+
+const int _DARWIN_FEATURE_ONLY_64_BIT_INODE = 1;
+
+const int _DARWIN_FEATURE_ONLY_VERS_1050 = 1;
 
 const int _DARWIN_FEATURE_ONLY_UNIX_CONFORMANCE = 1;
 
